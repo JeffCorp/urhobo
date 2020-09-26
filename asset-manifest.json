@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/urhobo/static/css/main.5f361e03.chunk.css",
-    "main.js": "/urhobo/static/js/main.095ea3ae.chunk.js",
-    "main.js.map": "/urhobo/static/js/main.095ea3ae.chunk.js.map",
+    "main.js": "/urhobo/static/js/main.289f9eb3.chunk.js",
+    "main.js.map": "/urhobo/static/js/main.289f9eb3.chunk.js.map",
     "runtime-main.js": "/urhobo/static/js/runtime-main.5b64cd1e.js",
     "runtime-main.js.map": "/urhobo/static/js/runtime-main.5b64cd1e.js.map",
     "static/js/2.68504703.chunk.js": "/urhobo/static/js/2.68504703.chunk.js",
     "static/js/2.68504703.chunk.js.map": "/urhobo/static/js/2.68504703.chunk.js.map",
     "index.html": "/urhobo/index.html",
-    "precache-manifest.dc701597c41a138779fabda2cc702ff3.js": "/urhobo/precache-manifest.dc701597c41a138779fabda2cc702ff3.js",
+    "precache-manifest.9233716f22f4b3beb81c8080b825faa3.js": "/urhobo/precache-manifest.9233716f22f4b3beb81c8080b825faa3.js",
     "service-worker.js": "/urhobo/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/urhobo/static/css/main.5f361e03.chunk.css.map",
     "static/js/2.68504703.chunk.js.LICENSE.txt": "/urhobo/static/js/2.68504703.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.5b64cd1e.js",
     "static/js/2.68504703.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.095ea3ae.chunk.js"
+    "static/js/main.289f9eb3.chunk.js"
   ]
 }
