@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/urhobo/static/css/main.5f361e03.chunk.css",
-    "main.js": "/urhobo/static/js/main.289f9eb3.chunk.js",
-    "main.js.map": "/urhobo/static/js/main.289f9eb3.chunk.js.map",
+    "main.js": "/urhobo/static/js/main.882de1c0.chunk.js",
+    "main.js.map": "/urhobo/static/js/main.882de1c0.chunk.js.map",
     "runtime-main.js": "/urhobo/static/js/runtime-main.5b64cd1e.js",
     "runtime-main.js.map": "/urhobo/static/js/runtime-main.5b64cd1e.js.map",
-    "static/js/2.68504703.chunk.js": "/urhobo/static/js/2.68504703.chunk.js",
-    "static/js/2.68504703.chunk.js.map": "/urhobo/static/js/2.68504703.chunk.js.map",
+    "static/js/2.b54c6f76.chunk.js": "/urhobo/static/js/2.b54c6f76.chunk.js",
+    "static/js/2.b54c6f76.chunk.js.map": "/urhobo/static/js/2.b54c6f76.chunk.js.map",
     "index.html": "/urhobo/index.html",
-    "precache-manifest.9233716f22f4b3beb81c8080b825faa3.js": "/urhobo/precache-manifest.9233716f22f4b3beb81c8080b825faa3.js",
+    "precache-manifest.aa698a8ab402336556607c90f609a08f.js": "/urhobo/precache-manifest.aa698a8ab402336556607c90f609a08f.js",
     "service-worker.js": "/urhobo/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/urhobo/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.68504703.chunk.js.LICENSE.txt": "/urhobo/static/js/2.68504703.chunk.js.LICENSE.txt",
+    "static/js/2.b54c6f76.chunk.js.LICENSE.txt": "/urhobo/static/js/2.b54c6f76.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/urhobo/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.5b64cd1e.js",
-    "static/js/2.68504703.chunk.js",
+    "static/js/2.b54c6f76.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.289f9eb3.chunk.js"
+    "static/js/main.882de1c0.chunk.js"
   ]
 }

@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8918e7027a53179a200b2c26c15a15d9",
+    "revision": "7feedbe94cafcad3d5ea4fa8882925a4",
     "url": "/urhobo/index.html"
   },
   {
-    "revision": "38bd16a689920d994756",
+    "revision": "855b6364017860de0f07",
     "url": "/urhobo/static/css/main.5f361e03.chunk.css"
   },
   {
-    "revision": "a16c337d4ffb6af59fe1",
-    "url": "/urhobo/static/js/2.68504703.chunk.js"
+    "revision": "ec1b49dd0757a6b1643b",
+    "url": "/urhobo/static/js/2.b54c6f76.chunk.js"
   },
   {
-    "revision": "5ac48c47bb3912b14c2d8de4f56d5ae8",
-    "url": "/urhobo/static/js/2.68504703.chunk.js.LICENSE.txt"
+    "revision": "c836aaadfe43dfd9fcb8ddeddfd61e18",
+    "url": "/urhobo/static/js/2.b54c6f76.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "38bd16a689920d994756",
-    "url": "/urhobo/static/js/main.289f9eb3.chunk.js"
+    "revision": "855b6364017860de0f07",
+    "url": "/urhobo/static/js/main.882de1c0.chunk.js"
   },
   {
     "revision": "92c9c1c27fa96e2c44db",
