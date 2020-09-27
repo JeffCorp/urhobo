@@ -1,13 +1,16 @@
 import React from "react";
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Card, Alert, Table } from "reactstrap";
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Card, Alert, Table,  Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Constants from "../constants/constants";
 import _ from "lodash";
 import Axios from "axios";
+import Lottie from "lottie-react";
+import BookLoading from "../bookLoading.json";
 
 
 export default class Dashboard extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef(); 
         this.state = {
             categories: [],
             title: "",
@@ -19,6 +22,7 @@ export default class Dashboard extends React.Component {
             category: "",
             display: false,
             _display: false,
+            deleted: false,
             cat: true,
             btn1: true,
             btn2: false,
@@ -30,7 +34,8 @@ export default class Dashboard extends React.Component {
                 {
                     verse: "",
                 }
-            ]
+            ],
+            modal: false 
         };
         this.fetchCategories = this.fetchCategories.bind(this);
         this.onVersesValueChanged = this.onVersesValueChanged.bind(this);
@@ -46,6 +51,7 @@ export default class Dashboard extends React.Component {
         this.fetchLibrary = this.fetchLibrary.bind(this);
         this.getCategoryNameFromId = this.getCategoryNameFromId.bind(this);
         this.onChanged = this.onChanged.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
     onTitleValueChanged(e) {
@@ -116,6 +122,43 @@ export default class Dashboard extends React.Component {
             list
         }, () => {
             console.log(list)
+        })
+    }
+
+    toggleModal = () => {
+        this.setState({
+            modal: !this.state.modal
+        })
+    }
+
+
+    deleteEntry(id){
+        let headers = {
+            "X-Parse-Application-Id": "wu0PXewUw6fc67fu3YWt8Kk6u5dovykG9Itz3lwb",
+            "X-Parse-REST-API-Key": "qQpgXE0wfkugEntT7CY44B6neifJ4rGO10bGMfnr"
+        };
+
+        Axios.delete(`https://parseapi.back4app.com/classes/library/${id}`,
+            {
+                headers: headers
+            }
+        ).then((response) => {
+            if (response) {
+                console.log(response);
+                this.fetchLibrary();
+                this.setState({
+                    deleted: true,
+                    verses: [],
+                    title: "",
+                    category: "",
+                    composer: "",
+                    uchb: "",
+                    audio: ""
+                }, () => {
+                    // window.scrollTo(0, this.myRef.current.offsetTop);
+                });
+                
+            }
         })
     }
 
@@ -271,6 +314,59 @@ export default class Dashboard extends React.Component {
                                     Categories
                                 </Button>
                             </div>
+                            <Modal isOpen={this.state.modal} toggle={this.toggleModal} style={{width: "70% !important"}}>
+                                <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
+                                <ModalBody>
+                                    <Form style={{ marginTop: "30px" }}>
+                                        <FormGroup>
+                                            <Input type="text" name="title" id="title" placeholder="Song Title" value={this.state.title} onChange={this.onTitleValueChanged} />
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Input type="text" name="composer" id="composer" placeholder="Composer" value={this.state.composer} onChange={this.onComposerValueChanged} />
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Input type="number" name="email" id="uchb" placeholder="UCHB number" value={this.state.uchb} onChange={this.onUchbValueChanged} />
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Input type="select" name="select" id="exampleSelect" onChange={this.onCategoriesChanged}>
+                                                <option value="">Choose category</option>
+                                                {
+                                                    this.state.categories.map((e) => {
+                                                        return <option value={e.objectId} > {e.category} </option>
+                                                    })
+                                                }
+                                            </Input>
+                                        </FormGroup>
+                                        {/* <FormGroup row> */}
+                                        {
+                                            this.state.inputList.map((item, i) => {
+                                                return (
+                                                    <div className="row mt-3" key={i}>
+                                                        <Col sm={10}>
+                                                            <Input type="textarea" name="verse" id="text" placeholder="Verses" onChange={e => this.onChanged(e, i)} />
+                                                        </Col>
+                                                        <Col sm={2}>
+                                                            <Button title="Add more verses" onClick={
+                                                                () => {
+                                                                    this.setState({
+                                                                        inputList: [...this.state.inputList, { verse: "" }]
+                                                                    })
+                                                                }
+                                                            }><i className="fa fa-plus"></i></Button>
+                                                        </Col>
+                                                    </div>
+                                                );
+                                            })
+                                        }
+                                        {/* </FormGroup> */}
+                                        <Button onClick={this.sendToServer} style={{ float: "right" }}>Submit</Button>
+                                    </Form>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button color="primary" onClick={this.toggleModal}>Do Something</Button>{' '}
+                                    <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+                                </ModalFooter>
+                            </Modal>
                         </div>
                     </Col>
                     <Col md={8} style={{ position: "absolute", right: "0" }}>
@@ -282,9 +378,15 @@ export default class Dashboard extends React.Component {
                                 </div>
                                     {
                                         this.state.display &&
-                                        <Alert className="success">
+                                        <Alert className="success" ref={this.myRef}>
                                             Data uploaded successfully to the server
-                                    </Alert>
+                                        </Alert>
+                                    }
+                                    {
+                                        this.state.deleted && 
+                                        <Alert className="danger" ref={this.myRef}>
+                                            Data deleted successfully from the server
+                                        </Alert>
                                     }
                                     <Form style={{ marginTop: "30px" }}>
                                         <FormGroup>
@@ -338,18 +440,26 @@ export default class Dashboard extends React.Component {
                                                     <th>Title</th>
                                                     <th>Composer</th>
                                                     <th>Category</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {
+                                                    this.state.fetched ?
                                                     this.state.fetched.map(value => {
-                                                        return <tr>
+                                                        return <tr onClick={this.toggleModal}>
                                                             <th scope="row">{value.uchb}</th>
                                                             <td>{value.title}</td>
                                                             <td>{value.composer}</td>
-                                                            <td>{this.state.categories[this.getCategoryNameFromId(value.category)].category}</td>
+                                                            <td>{ this.state.categories[this.getCategoryNameFromId(value.category)] && this.state.categories[this.getCategoryNameFromId(value.category)].category}</td>
+                                                            <td><i className="fa fa-trash" style={{color: "red"}} onClick={() => this.deleteEntry(value.objectId)}></i></td>
                                                         </tr>
                                                     })
+                                                    :
+                                                    <Lottie 
+                                                        animationData={BookLoading}
+                                                        autoPlay={true}
+                                                    /> 
                                                 }
                                             </tbody>
                                         </Table>
@@ -362,7 +472,7 @@ export default class Dashboard extends React.Component {
                                 </div>
                                     {
                                         this.state._display &&
-                                        <Alert className="success">
+                                        <Alert className="success" ref={this.myRef}>
                                             Data uploaded category successfully to the server
                                     </Alert>
                                     }
@@ -391,13 +501,18 @@ export default class Dashboard extends React.Component {
                                             </thead>
                                             <tbody>
                                                 {
-                                                    this.state.categories.map(value => {
-                                                        return <tr>
-                                                            <th scope="row">{value.short_code}</th>
-                                                            <td>{value.category}</td>
-                                                            <td>{value.description}</td>
-                                                        </tr>
-                                                    })
+                                                    this.state.categories ?
+                                                        this.state.categories.map(value => {
+                                                            return <tr>
+                                                                <th scope="row">{value.short_code}</th>
+                                                                <td>{value.category}</td>
+                                                                <td>{value.description}</td>
+                                                            </tr>
+                                                        })
+                                                    :
+                                                    <Lottie 
+                                                        animationData={BookLoading}
+                                                    />
                                                 }
                                             </tbody>
                                         </Table>
